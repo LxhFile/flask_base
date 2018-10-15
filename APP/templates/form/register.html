@@ -1,0 +1,64 @@
+{% extends 'base/register_main.html' %}
+
+
+{% block content %}
+    <h1 align="center">welcom to register</h1>
+    <form action="" method="post">
+
+        {#首先得写个夸战请求伪装，用来保护数据   也需要密钥 config设置
+        {{ form._csrf }}
+
+        {# Render the form's hidden fields in one call.
+        在一次调用加载渲染中 隐藏表单中的字段#}
+        {#  也需要密钥      这个也是夸战请求伪装#}
+        {{ form.hidden_tag() }}
+
+
+        {#        显示所有的错误信息出口  return self._errors #}
+{#        {% if form.errors %}#}
+{#            {{ form.errors }}<br>#}
+{##}
+{#        {% endif %}#}
+        {#  穿过过来的数据分别是
+        label（placeholder）： 文本框（input）#}
+
+        {{ form.username.label }}：{{ form.username }}<br>
+        {#        用户名错误信息出口 self.errors = list(self.process_errors) #}
+        {% for uerr in form.username.errors %}
+            {{ uerr }}<br>
+        {% endfor %}
+
+
+        {#加类的方法#}
+        {{ form.password.label }} : {{ form.password(class = 'passwordClass') }}<br>
+        {#        密码错误信息出口  self.errors = list(self.process_errors)#}
+        {% for err in form.password.errors %}
+            {{ err }}
+        {% endfor %}
+
+
+        {{ form.repassword.label }}: {{ form.repassword }}<br>
+        {#        重复密码错误信息出口  self.errors = list(self.process_errors) #}
+        {% for rerr in form.repassword.errors %}
+            {{ rerr }}<br>
+        {% endfor %}
+
+
+        {{ form.email.label }} : {{ form.email }}<br>
+        {#        邮件错误信息出口#}
+        {% for merr in form.email.errors %}
+            {{ merr }}<br>
+        {% endfor %}
+
+
+        {{ form.submit }}<br>
+
+    </form>
+
+    {#    重复提交#}
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+{% endblock %}
+
+

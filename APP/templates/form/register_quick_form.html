@@ -1,0 +1,14 @@
+{% extends 'bootstrap/base.html' %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+
+{#快速生成表单#}
+{% block content %}
+
+<h1 align="center">welcome to register</h1>
+
+<p>{{ wtf.quick_form(form) }}</p>
+
+{% endblock %}

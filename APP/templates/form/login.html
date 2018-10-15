@@ -1,0 +1,74 @@
+{% extends 'base/login_base.html' %}
+
+
+
+{% block content %}
+    <h1 align="center">welcome to login</h1>
+    <form action="" method="post">
+        {#    夸站请求伪装#}
+        {#   （）括号不要忘记     这里的hidden_tag（）这样才对不然 csrf_token 会直接显示在网页的#}
+        {{ form.hidden_tag() }}
+
+
+        {{ form.username.label }} : {{ form.username }}<br>
+        {% for u in form.username.errors %}
+            <p>{{ u }}</p><br>
+        {% endfor %}
+
+
+        {{ form.password.label }} : {{ form.password }}<br>
+        {% for p in form.password.errors %}
+            <p>{{ p }}</p><br>
+        {% endfor %}
+
+
+        {#    验证码图片#}
+
+
+        {{ form.code.label }} : {{ form.code(id = 'code') }}<br>
+
+{#        <label id="result_code"></label>#}
+
+
+        {{ form.button(id = 'bt') }}
+
+    </form>
+
+{% endblock %}
+
+
+
+{#测试ajax#}
+{#{% block scripts %}#}
+{#    <script>#}
+      {#  这个用不了,因为flask的按钮只有submit
+{#        $('#bt').click(function () {#}
+{#            var result = $('#result_code').html();#}
+{#            if (result == 'ok') {#}
+{#                $('form').submit();#}
+{#            }#}
+{#        });#}
+{##}
+{##}
+{#        $(function () {#}
+{#            $('#code').change(#}
+{#                $.ajax({#}
+{#                    url: '/login/login/',#}
+{#                    method: 'post',#}
+{#                    data: {'code': $('#code').val()},#}
+{#                    success: function (result) {#}
+                        {#001 查询正确#}
+{#                        if (result.result == '001') {#}
+{#                            $('#result_code').html('ok')#}
+{#                        } else {#}
+{#                            $('#result_code').html('no')#}
+{#                        }#}
+{#                    }#}
+{##}
+{#                })#}
+{#            )#}
+{#        })#}
+{##}
+{##}
+{#    </script>#}
+{#{% endblock %}#}
